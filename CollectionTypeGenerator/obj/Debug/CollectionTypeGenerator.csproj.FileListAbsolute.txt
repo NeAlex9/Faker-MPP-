@@ -1,0 +1,5 @@
+B:\BSUIR\3 course\5 sem\СПП\lab\Faker(lab2)\CollectionTypeGenerator\bin\Debug\CollectionTypeGenerator.dll
+B:\BSUIR\3 course\5 sem\СПП\lab\Faker(lab2)\CollectionTypeGenerator\bin\Debug\CollectionTypeGenerator.pdb
+B:\BSUIR\3 course\5 sem\СПП\lab\Faker(lab2)\CollectionTypeGenerator\obj\Debug\CollectionTypeGenerator.csproj.CoreCompileInputs.cache
+B:\BSUIR\3 course\5 sem\СПП\lab\Faker(lab2)\CollectionTypeGenerator\obj\Debug\CollectionTypeGenerator.dll
+B:\BSUIR\3 course\5 sem\СПП\lab\Faker(lab2)\CollectionTypeGenerator\obj\Debug\CollectionTypeGenerator.pdb

@@ -1,0 +1,5 @@
+B:\BSUIR\3 course\5 sem\СПП\lab\Faker(lab2)\SystemTypeGenerator\bin\Debug\SystemTypeGenerator.dll
+B:\BSUIR\3 course\5 sem\СПП\lab\Faker(lab2)\SystemTypeGenerator\bin\Debug\SystemTypeGenerator.pdb
+B:\BSUIR\3 course\5 sem\СПП\lab\Faker(lab2)\SystemTypeGenerator\obj\Debug\SystemTypeGenerator.csproj.CoreCompileInputs.cache
+B:\BSUIR\3 course\5 sem\СПП\lab\Faker(lab2)\SystemTypeGenerator\obj\Debug\SystemTypeGenerator.dll
+B:\BSUIR\3 course\5 sem\СПП\lab\Faker(lab2)\SystemTypeGenerator\obj\Debug\SystemTypeGenerator.pdb
