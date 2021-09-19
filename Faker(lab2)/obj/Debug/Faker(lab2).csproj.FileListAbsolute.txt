@@ -1,6 +1,0 @@
-B:\BSUIR\3 course\5 sem\СПП\lab\Faker(lab2)\Faker(lab2)\bin\Debug\Faker(lab2).exe.config
-B:\BSUIR\3 course\5 sem\СПП\lab\Faker(lab2)\Faker(lab2)\bin\Debug\Faker(lab2).exe
-B:\BSUIR\3 course\5 sem\СПП\lab\Faker(lab2)\Faker(lab2)\bin\Debug\Faker(lab2).pdb
-B:\BSUIR\3 course\5 sem\СПП\lab\Faker(lab2)\Faker(lab2)\obj\Debug\Faker(lab2).csproj.CoreCompileInputs.cache
-B:\BSUIR\3 course\5 sem\СПП\lab\Faker(lab2)\Faker(lab2)\obj\Debug\Faker(lab2).exe
-B:\BSUIR\3 course\5 sem\СПП\lab\Faker(lab2)\Faker(lab2)\obj\Debug\Faker(lab2).pdb

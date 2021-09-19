@@ -1,5 +1,0 @@
-B:\BSUIR\3 course\5 sem\СПП\lab\Faker(lab2)\BaseTypeGenerators\bin\Debug\BaseTypeGenerators.dll
-B:\BSUIR\3 course\5 sem\СПП\lab\Faker(lab2)\BaseTypeGenerators\bin\Debug\BaseTypeGenerators.pdb
-B:\BSUIR\3 course\5 sem\СПП\lab\Faker(lab2)\BaseTypeGenerators\obj\Debug\Generators.csproj.CoreCompileInputs.cache
-B:\BSUIR\3 course\5 sem\СПП\lab\Faker(lab2)\BaseTypeGenerators\obj\Debug\BaseTypeGenerators.dll
-B:\BSUIR\3 course\5 sem\СПП\lab\Faker(lab2)\BaseTypeGenerators\obj\Debug\BaseTypeGenerators.pdb
