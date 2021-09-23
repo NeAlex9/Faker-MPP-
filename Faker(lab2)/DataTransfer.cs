@@ -8,10 +8,10 @@ namespace Faker_lab2_
 {
     class DataTransfer
     {
-        public int Int{ get; set; }
-        public string String{ get; set; }
+        private int PrivateFieldInt;
+        public string WithoutSetString{ get; }
         public long Long{ get; set; }
-        public float Float{ get; private set; }
+        public float PrivatePropFloat{ get; private set; }
         public bool Bool{ get; set; }
     }
 }

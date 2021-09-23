@@ -50,6 +50,7 @@ namespace Faker_lab2_
             var type = typeof(T);
             var resultClass = (T)GetInstance(type);
             SetProperties<T>(ref resultClass);
+            SetFields<T>(ref resultClass);
             return (T)resultClass;
         }
 
@@ -78,7 +79,7 @@ namespace Faker_lab2_
             var props = instance.GetType().GetProperties();
             foreach (var pInfo in props)
             {
-                if (!(pInfo?.CanWrite ?? false))
+                if (!(pInfo?.CanWrite ?? false) || (pInfo?.SetMethod.IsPrivate ?? false))
                     continue;
 
                 if (this.BaseGenerators.TryGetValue(pInfo.PropertyType, out Generator generator))
@@ -86,6 +87,25 @@ namespace Faker_lab2_
                     pInfo.SetValue(instance, generator.Generate());
                 }
                 else if (this.GenericGenerators.TryGetValue(pInfo.PropertyType, out GenericGenerator genericGenerator))
+                {
+                    //generatedParams.Add(genericGenerator.Generate());
+                }
+            }
+        }
+
+        private void SetFields<T>(ref T instance)
+        {
+            var fields = instance.GetType().GetFields();
+            foreach (var fieldInfo in fields)
+            {
+                if (!fieldInfo.IsPublic)
+                    continue;
+
+                if (this.BaseGenerators.TryGetValue(fieldInfo.FieldType, out Generator generator))
+                {
+                    fieldInfo.SetValue(instance, generator.Generate());
+                }
+                else if (this.GenericGenerators.TryGetValue(fieldInfo.FieldType, out GenericGenerator genericGenerator))
                 {
                     //generatedParams.Add(genericGenerator.Generate());
                 }
