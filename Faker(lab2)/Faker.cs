@@ -48,15 +48,16 @@ namespace Faker_lab2_
         public T Create<T>()
         {
             var type = typeof(T);
-            var resultClass = (T)GetInstance(type);
+            var resultClass = (T)GetInstance<T>();
             SetProperties<T>(ref resultClass);
             SetFields<T>(ref resultClass);
             return (T)resultClass;
         }
 
-        private Object GetInstance(Type type)
+        private Object GetInstance<T>()
         {
-            var ctor = type.GetConstructors()?.FirstOrDefault();
+            var type = typeof(T);
+            var ctor = type.GetConstructors(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)?.FirstOrDefault();
             var constructorParams = ctor.GetParameters();
             var generatedParams = new List<dynamic>();
             foreach (var param in constructorParams)
@@ -71,7 +72,7 @@ namespace Faker_lab2_
                 }
             }
 
-            return Activator.CreateInstance(type, generatedParams.ToArray());
+            return (T)ctor.Invoke(generatedParams.ToArray());
         }
 
         private void SetProperties<T>(ref T instance)

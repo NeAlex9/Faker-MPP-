@@ -8,6 +8,11 @@ namespace Faker_lab2_
 {
     class DataTransfer
     {
+        private DataTransfer(string str)
+        {
+            WithoutSetString = str;
+        }
+
         private int PrivateFieldInt;
         public string WithoutSetString{ get; }
         public long Long{ get; set; }
