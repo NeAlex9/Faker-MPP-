@@ -87,9 +87,10 @@ namespace Faker_lab2_
                 {
                     pInfo.SetValue(instance, generator.Generate());
                 }
-                else if (this.GenericGenerators.TryGetValue(pInfo.PropertyType, out GenericGenerator genericGenerator))
+                else if (this.GenericGenerators.TryGetValue(pInfo.PropertyType.GetGenericTypeDefinition(), out GenericGenerator genericGenerator))
                 {
-                    //generatedParams.Add(genericGenerator.Generate());
+                    Type itemType = pInfo.PropertyType.GetGenericArguments()[0];
+                    pInfo.SetValue(instance, genericGenerator.Generate(itemType));
                 }
             }
         }

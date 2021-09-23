@@ -15,7 +15,7 @@ namespace Faker_lab2_
 
         private int PrivateFieldInt;
         public string WithoutSetString{ get; }
-        public long Long{ get; set; }
+        public List<bool> ListInt{ get; set; }
         public float PrivatePropFloat{ get; private set; }
         public bool Bool{ get; set; }
     }

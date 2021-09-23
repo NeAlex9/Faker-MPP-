@@ -12,7 +12,7 @@ namespace BaseTypeGenerators.ReferenceTypeGenerator
 
         public override object Generate(Type baseType)
         {
-            var len = Random.Next(10);
+            var len = Random.Next(10, 30);
             IList result = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(baseType));
             for (int i = 0; i < len; i++)
             {
