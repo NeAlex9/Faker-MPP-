@@ -10,6 +10,8 @@ namespace Faker_lab2_
     {
         static void Main(string[] args)
         {
+            var faker = new Faker();
+            var dto = faker.Create<DataTransfer>();
         }
     }
 }

@@ -1,18 +1,11 @@
 ﻿using System;
 using Generators;
 
-namespace BaseTypeGenerators.IntegerTypeGenerators
+namespace BaseTypeGenerators.ValueTypeGenerator.IntegerTypeGenerators
 {
-    public class SByteGenerator : Generator<sbyte>
+    public class SByteGenerator : Generator
     {
-        private static readonly Random Random;
-
-        static SByteGenerator()
-        {
-            Random = new Random();
-        }
-
-        public override sbyte Generate()
+        public override object Generate()
         {
             return (sbyte)Random.Next(-128, 256);
         }

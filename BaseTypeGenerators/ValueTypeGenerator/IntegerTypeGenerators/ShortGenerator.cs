@@ -1,22 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Generators;
 
-namespace BaseTypeGenerators.IntegerTypeGenerators
+namespace BaseTypeGenerators.ValueTypeGenerator.IntegerTypeGenerators
 {
-    public class ShortGenerator : Generator<short>
+    public class ShortGenerator : Generator
     {
-        private static readonly Random Random;
 
-        static ShortGenerator()
-        {
-            Random = new Random();
-        }
-
-        public override short Generate()
+        public override object Generate()
         {
             return (short)Random.Next(-32768, 65536);
         }

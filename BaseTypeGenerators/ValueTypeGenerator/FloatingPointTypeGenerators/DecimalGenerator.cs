@@ -7,16 +7,9 @@ using Generators;
 
 namespace BaseTypeGenerators.FloatingPointTypeGenerators
 {
-    public class DecimalGenerator : Generator<decimal>
+    public class DecimalGenerator : Generator
     {
-        private static readonly Random Random;
-
-        static DecimalGenerator()
-        {
-            Random = new Random();
-        }
-
-        public override decimal Generate()
+        public override object Generate()
         {
             bool sign = Random.Next(2) == 1;
             return new decimal(Random.Next() - -2147483648,

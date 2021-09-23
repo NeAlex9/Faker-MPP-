@@ -1,22 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Generators;
+﻿using Generators;
 
-namespace BaseTypeGenerators.IntegerTypeGenerators
+namespace BaseTypeGenerators.ValueTypeGenerator.IntegerTypeGenerators
 {
-    public class UShortGenerator : Generator<ushort>
+    public class UShortGenerator : Generator
     {
-        private static readonly Random Random;
-
-        static UShortGenerator()
-        {
-            Random = new Random();
-        }
-
-        public override ushort Generate()
+        public override object Generate()
         {
             return (ushort)Random.Next(65536);
         }

@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ValueTypeGenerator\CharGenerator.cs" />
+    <Compile Include="ReferenceTypeGenerator\ListGenerator.cs" />
     <Compile Include="ValueTypeGenerator\FloatingPointTypeGenerators\DecimalGenerator.cs" />
     <Compile Include="ValueTypeGenerator\FloatingPointTypeGenerators\DoubleGenerator.cs" />
     <Compile Include="ValueTypeGenerator\FloatingPointTypeGenerators\FloatGenerator.cs" />

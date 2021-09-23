@@ -1,22 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Generators;
 
-namespace BaseTypeGenerators.IntegerTypeGenerators
+namespace BaseTypeGenerators.ValueTypeGenerator.IntegerTypeGenerators
 {
-    public class IntGenerator : Generator<int>
+    public class IntGenerator : Generator
     {
-        private static readonly Random Random;
-
-        static IntGenerator()
-        {
-            Random = new Random();
-        }
-
-        public override int Generate()
+        public override object Generate()
         {
             var buffer = new byte[4];
             Random.NextBytes(buffer);

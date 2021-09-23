@@ -6,8 +6,15 @@ using System.Threading.Tasks;
 
 namespace Generators
 {
-    public abstract class Generator<T>
+    public abstract class Generator
     {
-        public abstract T Generate();
+        protected static readonly Random Random;
+
+        static Generator()
+        {
+            Random = new Random();
+        }
+
+        public abstract object Generate();
     }
 }

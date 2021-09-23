@@ -7,16 +7,9 @@ using Generators;
 
 namespace BaseTypeGenerators.FloatingPointTypeGenerators
 {
-    public class DoubleGenerator : Generator<double>
+    public class DoubleGenerator : Generator
     {
-        private static readonly Random Random;
-
-        static DoubleGenerator()
-        {
-            Random = new Random();
-        }
-
-        public override double Generate()
+        public override object Generate()
         {
             var buffer = new byte[8];
             Random.NextBytes(buffer);

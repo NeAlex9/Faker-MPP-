@@ -9,9 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generators", "BaseTypeGener
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemTypeGenerator", "SystemTypeGenerator\SystemTypeGenerator.csproj", "{F0E4A1D6-F35B-4FBD-B7E6-CF98434AD76C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollectionTypeGenerator", "CollectionTypeGenerator\CollectionTypeGenerator.csproj", "{2CFFAE07-EF7B-4119-9410-63B8ACADE078}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plagins", "Plagins", "{345F9BA1-C654-4D7D-AB80-F51902212F2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CharGenerator", "CharGenerator\CharGenerator.csproj", "{C5A9B3ED-13C0-4C7D-BC44-44E8AFB7D940}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,17 +31,17 @@ Global
 		{F0E4A1D6-F35B-4FBD-B7E6-CF98434AD76C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F0E4A1D6-F35B-4FBD-B7E6-CF98434AD76C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F0E4A1D6-F35B-4FBD-B7E6-CF98434AD76C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2CFFAE07-EF7B-4119-9410-63B8ACADE078}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2CFFAE07-EF7B-4119-9410-63B8ACADE078}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2CFFAE07-EF7B-4119-9410-63B8ACADE078}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2CFFAE07-EF7B-4119-9410-63B8ACADE078}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5A9B3ED-13C0-4C7D-BC44-44E8AFB7D940}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5A9B3ED-13C0-4C7D-BC44-44E8AFB7D940}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5A9B3ED-13C0-4C7D-BC44-44E8AFB7D940}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5A9B3ED-13C0-4C7D-BC44-44E8AFB7D940}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F0E4A1D6-F35B-4FBD-B7E6-CF98434AD76C} = {345F9BA1-C654-4D7D-AB80-F51902212F2F}
-		{2CFFAE07-EF7B-4119-9410-63B8ACADE078} = {345F9BA1-C654-4D7D-AB80-F51902212F2F}
+		{C5A9B3ED-13C0-4C7D-BC44-44E8AFB7D940} = {345F9BA1-C654-4D7D-AB80-F51902212F2F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {51CBEB4C-E0C3-49F0-9AE1-9361306102C3}

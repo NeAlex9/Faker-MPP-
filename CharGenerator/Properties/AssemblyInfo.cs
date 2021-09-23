@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CollectionTypeGenerator")]
+[assembly: AssemblyTitle("CharGenerator")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("CollectionTypeGenerator")]
+[assembly: AssemblyProduct("CharGenerator")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("2cffae07-ef7b-4119-9410-63b8acade078")]
+[assembly: Guid("c5a9b3ed-13c0-4c7d-bc44-44e8afb7d940")]
 
 // Version information for an assembly consists of the following four values:
 //
