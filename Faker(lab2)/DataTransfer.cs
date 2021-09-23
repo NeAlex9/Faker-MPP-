@@ -11,6 +11,7 @@ namespace Faker_lab2_
         public int Int{ get; set; }
         public string String{ get; set; }
         public long Long{ get; set; }
-        public float Float{ get; set; }
+        public float Float{ get; private set; }
+        public bool Bool{ get; set; }
     }
 }
