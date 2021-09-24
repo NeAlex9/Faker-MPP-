@@ -48,12 +48,12 @@ namespace Faker_lab2_
             this._nestedTypes = new Stack<Type>();
         }
 
-        public T Create<T>()
+        public T Create<T>() where T : class
         {
             var type = typeof(T);
             this._nestedTypes.Push(type);
             var resultClass = Create(type);
-            return (T)resultClass;
+            return resultClass as T;
         }
 
         private bool IsCorrectBaseValue(Type type, out Generator generator)
@@ -82,7 +82,7 @@ namespace Faker_lab2_
 
         private bool IsCustomClassTypeWithoutObsession(Type type)
         {
-            if (type.IsClass && !this.SystemTypes.Contains(type) && !this._nestedTypes.Contains(type))
+            if (type.IsClass && !type.IsArray && !this.SystemTypes.Contains(type) && !this._nestedTypes.Contains(type))
             {
                 return true;
             }
@@ -93,8 +93,12 @@ namespace Faker_lab2_
         public object Create(Type objectType)
         {
             var resultClass = GetInstance(objectType);
-            SetProperties(ref resultClass);
-            SetFields(ref resultClass);
+            if (resultClass != null)
+            {
+                SetProperties(ref resultClass);
+                SetFields(ref resultClass);
+            }
+
             return resultClass;
         }
 
@@ -124,7 +128,14 @@ namespace Faker_lab2_
                 }
             }
 
-            return ctor.Invoke(generatedParams.ToArray());
+            try
+            {
+                return ctor.Invoke(generatedParams.ToArray());
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
 
         private void SetProperties(ref dynamic instance)

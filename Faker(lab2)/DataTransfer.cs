@@ -17,7 +17,7 @@ namespace Faker_lab2_
         public string WithoutSetString{ get; set; }
         public List<bool> ListInt{ get; set; }
         public System.Object PropFloat{ get; set; }
-        public bool Bool{ get; set; }
+        public bool[] Bool{ get; set; }
 
         private HeHe Hehe;
 
@@ -28,7 +28,7 @@ namespace Faker_lab2_
     {
         private int Number;
 
-        public List<string> lst;
+        public IEnumerable<string> lst;
 
         private HeHe(int n)
         {
