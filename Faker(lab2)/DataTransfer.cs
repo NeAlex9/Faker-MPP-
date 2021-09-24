@@ -10,16 +10,16 @@ namespace Faker_lab2_
     {
         private DataTransfer(HeHe str)
         {
-            d = str;
+            Hehe = str;
         }
 
-        private int PrivateFieldInt;
-        public string WithoutSetString{ get; }
-        private List<bool> ListInt{ get; set; }
+        public int PrivateFieldInt;
+        public string WithoutSetString{ get; set; }
+        public List<bool> ListInt{ get; set; }
         public System.Object PropFloat{ get; set; }
         public bool Bool{ get; set; }
 
-        private HeHe d;
+        private HeHe Hehe;
 
         public HaHa Haha;
     }
@@ -39,5 +39,7 @@ namespace Faker_lab2_
     public class HaHa
     {
         public int m;
+
+        public DataTransfer dataTransfer;
     }
 }
