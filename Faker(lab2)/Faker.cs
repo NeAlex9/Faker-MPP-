@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -15,10 +16,11 @@ namespace Faker_lab2_
 {
     internal class Faker
     {
-        public List<Type> SystemTypes { get; private set; }
+        public List<Type> SystemTypes { get; }
 
         public Dictionary<Type, Generator> BaseGenerators { get; private set; }
         public Dictionary<Type, GenericGenerator> GenericGenerators { get; private set; }
+        private Stack<Type> _nestedTypes; 
 
         public Faker()
         {
@@ -43,20 +45,26 @@ namespace Faker_lab2_
             {
                 { typeof(List<>), new ListGenerator(this.BaseGenerators) }
             };
+            this._nestedTypes = new Stack<Type>();
         }
 
         public T Create<T>()
         {
             var type = typeof(T);
-            var resultClass = (T)GetInstance<T>();
-            SetProperties<T>(ref resultClass);
-            SetFields<T>(ref resultClass);
+            var resultClass = Create(type);
             return (T)resultClass;
         }
 
-        private Object GetInstance<T>()
+        public object Create(Type objectType)
         {
-            var type = typeof(T);
+            var resultClass = GetInstance(objectType);
+            SetProperties(ref resultClass);
+            SetFields(ref resultClass);
+            return resultClass;
+        }
+
+        private Object GetInstance(Type type)
+        {
             var ctor = type.GetConstructors(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)?.FirstOrDefault();
             var constructorParams = ctor.GetParameters();
             var generatedParams = new List<dynamic>();
@@ -66,16 +74,26 @@ namespace Faker_lab2_
                 {
                     generatedParams.Add(generator.Generate());
                 }
-                else if (this.GenericGenerators.TryGetValue(param.ParameterType, out GenericGenerator genericGenerator))
+                else if (param.ParameterType.IsGenericType)
                 {
-                    //generatedParams.Add(genericGenerator.Generate());
+                    if (this.GenericGenerators.TryGetValue(param.ParameterType.GetGenericTypeDefinition(),
+                        out GenericGenerator genericGenerator))
+                    {
+                        Type itemType = param.ParameterType.GetGenericArguments()[0];
+                        generatedParams.Add(genericGenerator.Generate(itemType));
+                    }
+                }
+                else if (param.ParameterType.IsClass && !this.SystemTypes.Contains(param.ParameterType))
+                {
+                    var elem = Create(param.ParameterType);
+                    generatedParams.Add(elem);
                 }
             }
 
-            return (T)ctor.Invoke(generatedParams.ToArray());
+            return ctor.Invoke(generatedParams.ToArray());
         }
 
-        private void SetProperties<T>(ref T instance)
+        private void SetProperties(ref dynamic instance)
         {
             var props = instance.GetType().GetProperties();
             foreach (var pInfo in props)
@@ -87,15 +105,24 @@ namespace Faker_lab2_
                 {
                     pInfo.SetValue(instance, generator.Generate());
                 }
-                else if (this.GenericGenerators.TryGetValue(pInfo.PropertyType.GetGenericTypeDefinition(), out GenericGenerator genericGenerator))
+                else if (pInfo.PropertyType.IsGenericType)
                 {
-                    Type itemType = pInfo.PropertyType.GetGenericArguments()[0];
-                    pInfo.SetValue(instance, genericGenerator.Generate(itemType));
+                    if (this.GenericGenerators.TryGetValue(pInfo.PropertyType.GetGenericTypeDefinition(),
+                        out GenericGenerator genericGenerator))
+                    {
+                        Type itemType = pInfo.PropertyType.GetGenericArguments()[0];
+                        pInfo.SetValue(instance, genericGenerator.Generate(itemType));
+                    }
+                }
+                else if (pInfo.PropertyType.IsClass && !this.SystemTypes.Contains(pInfo.PropertyType))
+                {
+                    var elem = Create(pInfo.PropertyType);
+                    pInfo.SetValue(instance, elem);
                 }
             }
         }
 
-        private void SetFields<T>(ref T instance)
+        private void SetFields(ref dynamic instance)
         {
             var fields = instance.GetType().GetFields();
             foreach (var fieldInfo in fields)
@@ -107,9 +134,19 @@ namespace Faker_lab2_
                 {
                     fieldInfo.SetValue(instance, generator.Generate());
                 }
-                else if (this.GenericGenerators.TryGetValue(fieldInfo.FieldType, out GenericGenerator genericGenerator))
+                else if (fieldInfo.FieldType.IsGenericType)
                 {
-                    //generatedParams.Add(genericGenerator.Generate());
+                    if (this.GenericGenerators.TryGetValue(fieldInfo.FieldType.GetGenericTypeDefinition(),
+                        out GenericGenerator genericGenerator))
+                    {
+                        Type itemType = fieldInfo.FieldType.GetGenericArguments()[0];
+                        fieldInfo.SetValue(instance, genericGenerator.Generate(itemType));
+                    }
+                }
+                else if (fieldInfo.FieldType.IsClass && !this.SystemTypes.Contains(fieldInfo.FieldType))
+                {
+                    var elem = Create(fieldInfo.FieldType);
+                    fieldInfo.SetValue(instance, elem);
                 }
             }
         }

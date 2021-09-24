@@ -12,6 +12,7 @@ namespace Faker_lab2_
         {
             var faker = new Faker();
             var dto = faker.Create<DataTransfer>();
+            Console.ReadLine();
         }
     }
 }
