@@ -9,6 +9,11 @@ namespace BaseTypeGenerators.ValueTypeGenerator
 {
     public class BooleanGenerator : Generator
     {
+        public BooleanGenerator()
+        {
+            this.ElemType = typeof(bool);
+        }
+
         public override object Generate()
         {
             return Random.Next(2) != 0;

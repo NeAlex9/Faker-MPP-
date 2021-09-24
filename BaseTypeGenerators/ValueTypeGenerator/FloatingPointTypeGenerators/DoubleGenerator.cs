@@ -9,6 +9,11 @@ namespace BaseTypeGenerators.FloatingPointTypeGenerators
 {
     public class DoubleGenerator : Generator
     {
+        public DoubleGenerator()
+        {
+            this.ElemType = typeof(double);
+        }
+
         public override object Generate()
         {
             var buffer = new byte[8];

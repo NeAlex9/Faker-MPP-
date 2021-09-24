@@ -10,6 +10,8 @@ namespace Generators
     {
         protected static readonly Random Random;
 
+        public Type  ElemType { get; protected set; }
+
         static Generator()
         {
             Random = new Random();

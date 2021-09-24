@@ -5,6 +5,11 @@ namespace BaseTypeGenerators.ValueTypeGenerator.IntegerTypeGenerators
 {
     public class LongGenerator : Generator
     {
+        public LongGenerator()
+        {
+            this.ElemType = typeof(long);
+        }
+
         public override object Generate()
         {
             var buffer = new byte[8];

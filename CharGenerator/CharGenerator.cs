@@ -13,6 +13,7 @@ namespace CharGenerator
 
         public CharGenerator()
         {
+            this.ElemType = typeof(char);
             this.AllowedCharSymbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         }
 

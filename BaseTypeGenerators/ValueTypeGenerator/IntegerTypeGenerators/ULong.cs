@@ -5,6 +5,12 @@ namespace BaseTypeGenerators.ValueTypeGenerator.IntegerTypeGenerators
 {
     public class ULongGenerator : Generator
     {
+        public ULongGenerator()
+        {
+            this.ElemType = typeof(ulong);
+        }
+
+
         public override object Generate()
         {
             var buffer = new byte[8];

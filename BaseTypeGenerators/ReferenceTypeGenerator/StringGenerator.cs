@@ -11,8 +11,9 @@ namespace BaseTypeGenerators.ReferenceTypeGenerator
     {
         public string AllowedStringSymbols{ get; }
 
-        public StringGenerator()
+        public StringGenerator() 
         {
+            this.ElemType = typeof(string);
             this.AllowedStringSymbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         }
 

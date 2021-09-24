@@ -8,18 +8,28 @@ namespace BaseTypeGenerators.ReferenceTypeGenerator
 {
     public class ListGenerator : GenericGenerator
     {
-        public ListGenerator(Dictionary<Type,Generator> generators) : base(generators){}
+        public ListGenerator(Dictionary<Type, Generator> generators) : base(generators)
+        {
+            this.ElemType = typeof(List<>);
+        }
 
         public override object Generate(Type baseType)
         {
-            var len = Random.Next(10, 30);
-            IList result = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(baseType));
-            for (int i = 0; i < len; i++)
+            try
             {
-                result.Add(Generators[baseType].Generate());
-            }
+                var len = Random.Next(10, 30);
+                IList result = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(baseType));
+                for (int i = 0; i < len; i++)
+                {
+                    result.Add(Generators[baseType].Generate());
+                }
 
-            return result;
+                return result;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
     }
 }

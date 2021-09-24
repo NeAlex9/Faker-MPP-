@@ -9,6 +9,11 @@ namespace BaseTypeGenerators.FloatingPointTypeGenerators
 {
     public class FloatGenerator : Generator
     {
+        public FloatGenerator()
+        {
+            this.ElemType = typeof(float);
+        }
+
         public override object Generate()
         {
             var buffer = new byte[4];

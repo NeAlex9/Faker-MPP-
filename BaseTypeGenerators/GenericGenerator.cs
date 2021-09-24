@@ -12,6 +12,8 @@ namespace BaseTypeGenerators
         public static readonly Random Random;
         public Dictionary<Type, Generator> Generators{ get; private set; }
 
+        public Type ElemType { get; protected set; }
+
         static GenericGenerator()
         {
             Random = new Random();

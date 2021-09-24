@@ -9,6 +9,11 @@ namespace SystemTypeGenerator
 {
     public class DateTimeGenerator : Generator
     {
+        public DateTimeGenerator()
+        {
+            this.ElemType = typeof(DateTime);
+        }
+
         public override object Generate()
         {
             int year = Random.Next(DateTime.MinValue.Year, DateTime.MaxValue.Year + 1);

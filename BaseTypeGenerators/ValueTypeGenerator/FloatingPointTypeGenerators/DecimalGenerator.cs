@@ -9,6 +9,11 @@ namespace BaseTypeGenerators.FloatingPointTypeGenerators
 {
     public class DecimalGenerator : Generator
     {
+        public DecimalGenerator()
+        {
+            this.ElemType = typeof(decimal);
+        } 
+
         public override object Generate()
         {
             bool sign = Random.Next(2) == 1;

@@ -20,7 +20,7 @@ namespace Faker_lab2_
 
         public Dictionary<Type, Generator> BaseGenerators { get; private set; }
         public Dictionary<Type, GenericGenerator> GenericGenerators { get; private set; }
-        private Stack<Type> _nestedTypes;
+        private readonly Stack<Type> _nestedTypes;
 
         public Faker()
         {
@@ -39,7 +39,10 @@ namespace Faker_lab2_
                 {typeof(double), new DoubleGenerator()},
                 {typeof(float), new FloatGenerator()},
                 {typeof(bool), new BooleanGenerator()},
-                {typeof(string), new StringGenerator()}
+                {typeof(string), new StringGenerator()},
+                {typeof(char), LoadPlugin(@"B:\BSUIR\3 course\5 sem\СПП\lab\Faker(lab2)\CharGenerator\bin\Debug\CharGenerator.dll", typeof(char))},
+                {typeof(DateTime), LoadPlugin(@"B:\BSUIR\3 course\5 sem\СПП\lab\Faker(lab2)\SystemTypeGenerator\bin\Debug\SystemTypeGenerator.dll", typeof(DateTime))
+                }
             };
             this.GenericGenerators = new Dictionary<Type, GenericGenerator>
             {
@@ -54,6 +57,22 @@ namespace Faker_lab2_
             this._nestedTypes.Push(type);
             var resultClass = Create(type);
             return resultClass as T;
+        }
+
+        public Generator LoadPlugin(string path, Type generatorType)
+        {
+            Assembly assembly = Assembly.LoadFrom(path);
+            var types = assembly.GetTypes();
+            foreach (var type in types)
+            {
+                var inst = (Generator)Activator.CreateInstance(type);
+                if (inst.ElemType == generatorType)
+                {
+                    return inst;
+                }
+            }
+
+            return null;
         }
 
         private bool IsCorrectBaseValue(Type type, out Generator generator)
@@ -193,5 +212,12 @@ namespace Faker_lab2_
                 }
             }
         }
+    }
+
+    internal class GeneratorByPlugin
+    {
+        public Type ElementType { get; private set; }
+
+        public Generator Generator{ get; private set;  }
     }
 }

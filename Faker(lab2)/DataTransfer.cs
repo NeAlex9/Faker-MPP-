@@ -15,9 +15,9 @@ namespace Faker_lab2_
 
         public int PrivateFieldInt;
         public string WithoutSetString{ get; set; }
-        public List<bool> ListInt{ get; set; }
-        public System.Object PropFloat{ get; set; }
-        public bool[] Bool{ get; set; }
+        public List<bool[]> ListInt{ get; set; }
+        public DateTime date{ get; set; }
+        public char Char{ get; set; }
 
         private HeHe Hehe;
 
@@ -30,7 +30,7 @@ namespace Faker_lab2_
 
         public IEnumerable<string> lst;
 
-        private HeHe(int n)
+        private HeHe(int n, object e)
         {
             Number = n;
         }

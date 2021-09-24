@@ -5,6 +5,11 @@ namespace BaseTypeGenerators.ValueTypeGenerator.IntegerTypeGenerators
 {
     public class IntGenerator : Generator
     {
+        public IntGenerator()
+        {
+            this.ElemType = typeof(int);
+        }
+
         public override object Generate()
         {
             var buffer = new byte[4];
