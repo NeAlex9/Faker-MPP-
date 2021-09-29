@@ -145,13 +145,12 @@ namespace Faker_lab2_
                     generatedParams.Add(elem);
                     this._nestedTypes.Pop();
                 }
-            }
-
+            } 
             try
             {
                 return ctor.Invoke(generatedParams.ToArray());
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return null;
             }
