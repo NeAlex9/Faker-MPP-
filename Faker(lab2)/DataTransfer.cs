@@ -8,31 +8,31 @@ namespace Faker_lab2_
 {
     public class DataTransfer
     {
-        private DataTransfer(HeHe str)
+        private DataTransfer(string name)
         {
-            Hehe = str;
+            //Name = name;
         }
 
-        public int PrivateFieldInt;
-        public string WithSetString{ get; set; }
+        public HeHe Hehe;
+
+        private int PrivateFieldInt;
+        public string Name;
         public List<bool[]> ListInt{ get; set; }
         public DateTime date{ get; set; }
         public char Char{ get; set; }
-
-        private HeHe Hehe;
 
         public HaHa Haha;
     }
 
     public class HeHe
     {
-        private int Number;
+        public string Name { get; private set; }
 
         public IEnumerable<string> lst;
 
-        private HeHe(int n, object e)
+        private HeHe(string name)
         {
-            Number = n;
+            Name = name;
         }
     }
 

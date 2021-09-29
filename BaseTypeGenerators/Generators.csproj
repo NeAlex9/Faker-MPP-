@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomGenerators\NameGenerator.cs" />
     <Compile Include="GenericGenerator.cs" />
     <Compile Include="ReferenceTypeGenerator\GenericTypeGenerators\ListGenerator.cs" />
     <Compile Include="ValueTypeGenerator\BooleanGenerator.cs" />

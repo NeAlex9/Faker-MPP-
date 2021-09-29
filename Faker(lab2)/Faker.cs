@@ -20,9 +20,10 @@ namespace Faker_lab2_
 
         public Dictionary<Type, Generator> BaseGenerators { get; private set; }
         public Dictionary<Type, GenericGenerator> GenericGenerators { get; private set; }
+        public Dictionary<MemberInfo, Generator> CustomGenerators{ get; private set; }
         private readonly Stack<Type> _nestedTypes;
 
-        public Faker()
+        public Faker(FakerConfig fakerConfig)
         {
             SystemTypes = typeof(Assembly).Assembly.GetExportedTypes().ToList();
             this.BaseGenerators = new Dictionary<Type, Generator>
@@ -48,7 +49,9 @@ namespace Faker_lab2_
             {
                 { typeof(List<>), new ListGenerator(this.BaseGenerators) }
             };
+            this.CustomGenerators = new Dictionary<MemberInfo, Generator>();
             this._nestedTypes = new Stack<Type>();
+            this.CustomGenerators = fakerConfig.CustomGenerators;
         }
 
         public T Create<T>() where T : class
@@ -75,7 +78,7 @@ namespace Faker_lab2_
             return null;
         }
 
-        private bool IsCorrectBaseValue(Type type, out Generator generator)
+        private bool TryGetBaseGenerator(Type type, out Generator generator)
         {
             if (this.BaseGenerators.TryGetValue(type, out generator))
             {
@@ -85,13 +88,64 @@ namespace Faker_lab2_
             return false;
         }
 
-        private bool IsCorrectGenericType(Type type, out GenericGenerator generator)
+        private bool TryGetGenericGenerator(Type type, out GenericGenerator generator)
         {
             generator = null;
             if (type.IsGenericType)
             {
                 if (this.GenericGenerators.TryGetValue(type.GetGenericTypeDefinition(), out generator))
                 {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool TryGetCustomGenerator(MemberInfo info, out Generator generator)
+        {
+            generator = null;
+            foreach (KeyValuePair<MemberInfo, Generator> keyValue in CustomGenerators)
+            {
+                if ((keyValue.Key.Name.ToLower() == info.Name.ToLower()) && info.Equals(keyValue.Key))
+                {
+                    generator = keyValue.Value;
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool TryGetCustomGeneratorByParams(ParameterInfo info, out Generator generator)
+        {
+            generator = null;
+            foreach (KeyValuePair<MemberInfo, Generator> keyValue in CustomGenerators)
+            {
+                var member = keyValue.Key;
+                string convertedType;
+                switch (member.MemberType)
+                {
+                    case MemberTypes.Event:
+                        convertedType = ((EventInfo)member).EventHandlerType.ToString();
+                        break;
+                    case MemberTypes.Field:
+                        convertedType = ((FieldInfo)member).FieldType.ToString();
+                        break;
+                    case MemberTypes.Method:
+                        convertedType = ((MethodInfo)member).MemberType.ToString();
+                        break;
+                    case MemberTypes.Property:
+                        convertedType = ((PropertyInfo)member).PropertyType.ToString();
+                        break;
+                    default:
+                        return false;
+                }
+                if ((keyValue.Key.Name.ToLower() == info.Name.ToLower()) && 
+                    info.ParameterType.ToString() == convertedType &&
+                    (info.Member.DeclaringType.ToString() == keyValue.Key.DeclaringType.ToString()))
+                {
+                    generator = keyValue.Value;
                     return true;
                 }
             }
@@ -129,11 +183,15 @@ namespace Faker_lab2_
             foreach (var param in constructorParams)
             {
                 Type typeObj = param.ParameterType;
-                if (IsCorrectBaseValue(typeObj, out Generator generator))
+                if (TryGetCustomGeneratorByParams(param, out Generator customGenerator))
+                {
+                    generatedParams.Add(customGenerator.Generate());
+                }
+                else if (TryGetBaseGenerator(typeObj, out Generator generator))
                 {
                     generatedParams.Add(generator.Generate());
                 }
-                else if (IsCorrectGenericType(typeObj, out GenericGenerator genericGenerator))
+                else if (TryGetGenericGenerator(typeObj, out GenericGenerator genericGenerator))
                 {
                     Type itemType = param.ParameterType.GetGenericArguments()[0];
                     generatedParams.Add(genericGenerator.Generate(itemType));
@@ -165,11 +223,15 @@ namespace Faker_lab2_
                 if (!(pInfo?.CanWrite ?? false) || (pInfo?.SetMethod.IsPrivate ?? false))
                     continue;
 
-                if (IsCorrectBaseValue(typeObj, out Generator generator))
+                if (TryGetCustomGenerator(pInfo, out Generator customGenerator))
+                {
+                    pInfo.SetValue(instance, customGenerator.Generate());
+                }
+                else if (TryGetBaseGenerator(typeObj, out Generator generator))
                 {
                     pInfo.SetValue(instance, generator.Generate());
                 }
-                else if (IsCorrectGenericType(typeObj, out GenericGenerator genericGenerator))
+                else if (TryGetGenericGenerator(typeObj, out GenericGenerator genericGenerator))
                 {
                     Type itemType = pInfo.PropertyType.GetGenericArguments()[0];
                     pInfo.SetValue(instance, genericGenerator.Generate(itemType));
@@ -193,11 +255,15 @@ namespace Faker_lab2_
                 if (!fieldInfo.IsPublic)
                     continue;
 
-                if (IsCorrectBaseValue(typeObj, out Generator generator))
+                if (TryGetCustomGenerator(fieldInfo, out Generator customGenerator))
+                {
+                    fieldInfo.SetValue(instance, customGenerator.Generate());
+                }
+                else if (TryGetBaseGenerator(typeObj, out Generator generator))
                 {
                     fieldInfo.SetValue(instance, generator.Generate());
                 }
-                else if (IsCorrectGenericType(typeObj, out GenericGenerator genericGenerator))
+                else if (TryGetGenericGenerator(typeObj, out GenericGenerator genericGenerator))
                 {
                     Type itemType = fieldInfo.FieldType.GetGenericArguments()[0];
                     fieldInfo.SetValue(instance, genericGenerator.Generate(itemType));
