@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="DataTransfer.cs" />
     <Compile Include="Faker.cs" />
+    <Compile Include="FakerConfig.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

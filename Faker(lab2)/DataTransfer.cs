@@ -14,7 +14,7 @@ namespace Faker_lab2_
         }
 
         public int PrivateFieldInt;
-        public string WithoutSetString{ get; set; }
+        public string WithSetString{ get; set; }
         public List<bool[]> ListInt{ get; set; }
         public DateTime date{ get; set; }
         public char Char{ get; set; }
