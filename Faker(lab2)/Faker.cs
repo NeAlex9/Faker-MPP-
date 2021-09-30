@@ -21,6 +21,7 @@ namespace Faker_lab2_
         public Dictionary<Type, Generator> BaseGenerators { get; private set; }
         public Dictionary<Type, GenericGenerator> GenericGenerators { get; private set; }
         public Dictionary<MemberInfo, Generator> CustomGenerators{ get; private set; }
+
         private readonly Stack<Type> _nestedTypes;
 
         public Faker(FakerConfig fakerConfig)
@@ -49,9 +50,8 @@ namespace Faker_lab2_
             {
                 { typeof(List<>), new ListGenerator(this.BaseGenerators) }
             };
-            this.CustomGenerators = new Dictionary<MemberInfo, Generator>();
-            this._nestedTypes = new Stack<Type>();
             this.CustomGenerators = fakerConfig.CustomGenerators;
+            this._nestedTypes = new Stack<Type>();
         }
 
         public T Create<T>() where T : class
@@ -277,12 +277,5 @@ namespace Faker_lab2_
                 }
             }
         }
-    }
-
-    internal class GeneratorByPlugin
-    {
-        public Type ElementType { get; private set; }
-
-        public Generator Generator{ get; private set;  }
     }
 }

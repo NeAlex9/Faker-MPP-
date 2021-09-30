@@ -13,7 +13,7 @@ namespace Faker_lab2_
         static void Main(string[] args)
         {
             var fakerConfig = new FakerConfig();
-            fakerConfig.Add<DataTransfer, string, NameGenerator>(elem => elem.Name);
+            fakerConfig.Add<HeHe, string, NameGenerator>(elem => elem.Name);
             var faker = new Faker(fakerConfig);
             var dto = faker.Create<DataTransfer>();
             Console.ReadLine();
